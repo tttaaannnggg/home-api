@@ -42,8 +42,8 @@ const authController = (req, res, next)=>{
 app.post('/api/posts', authController, (req, res)=>{
   const post = req.body;
   client.query(
-    'insert into posts(author, body) values ($1, $2)', 
-    [post.author, post.body], 
+    'insert into posts(author, title, body) values ($1, $2, $3)', 
+    [post.author, post.title, post.body], 
     (err, ans)=>{
       if(err){
         return next('error while posting!');
