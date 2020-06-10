@@ -40,7 +40,7 @@ const read = (client)=>(req,res,next)=>{
 const update = (client)=>(req,res,next)=>{
   const {author, title, body} = req.body;
   console.log('updating post with id', req.params.id)
-  client.query('UPDATE posts set author = $1, title = $2, body = $3 where id = $3 ', [author, title, body, req.params.id], (err, ans) => {
+  client.query('UPDATE posts set author = $1, title = $2, body = $3 where id = $4 ', [author, title, body, req.params.id], (err, ans) => {
     if(err){
       res.status(404)
       return next(err);
