@@ -20,7 +20,7 @@ const read = (client)=>(req,res,next)=>{
     console.log('getting most recent post');
     client.query('select * from posts order by id desc limit 1',(err, ans)=>{
       if(err){
-        req.status(404)
+        res.status(404)
         return next(err);
       }
       res.json(ans.rows);
@@ -29,7 +29,7 @@ const read = (client)=>(req,res,next)=>{
     console.log('getting id', req.params.id);
     client.query('SELECT * FROM posts WHERE ID = $1', [req.params.id], (err, ans) => {
       if(err){
-        req.status(404)
+        res.status(404)
         return next(err);
       }
       res.json(ans.rows);
@@ -42,7 +42,7 @@ const update = (client)=>(req,res,next)=>{
   console.log('updating post with id', req.params.id)
   client.query('UPDATE posts set author = $1, title = $2, body = $3 where id = $3 ', [author, title, body, req.params.id], (err, ans) => {
     if(err){
-      req.status(404)
+      res.status(404)
       return next(err);
     }
     return res.json(ans)
