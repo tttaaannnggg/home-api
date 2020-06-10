@@ -42,5 +42,6 @@ const authController = (req, res, next)=>{
 app.post('/api/posts', authController, blogController.create);
 
 app.get('/api/posts/:id', blogController.readById);
+app.post('/api/posts/:id', authController, blogController.updateById);
 
 app.listen(port, ()=>console.log(`listening on ${port}`));
