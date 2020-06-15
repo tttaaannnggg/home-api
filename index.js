@@ -8,6 +8,8 @@ const bodyParser = require('body-parser');
 const { Client } = require('pg');
 const client = new Client();
 const blogController = require('./blog.controller')(client);
+const authControllerB = require('./auth.controller');
+/*
 client.connect();
 let pass;
 console.log('retreiving pass from db');
@@ -17,6 +19,7 @@ client.query('select * from users where id = 1', (err, ans)=>{
     console.log('cached pass on server');
   }
 })
+*/
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -39,6 +42,7 @@ const authController = (req, res, next)=>{
   }
 }
 
+app.get('/aaa', authControllerB.validateAuth);
 app.post('/api/posts', authController, blogController.create);
 
 app.get('/api/posts/:id', blogController.readById);
