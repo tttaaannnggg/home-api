@@ -9,7 +9,7 @@ function LRU(maxSize) {
 //access should move it to the top of the list
 LRU.prototype.get = function(key) {
   if (!this.keys[key]) {
-    return null;
+    return undefined;
   }
   const vals = this.keys[key].removeNode();
   this.q.insertFront(key, vals.removed.val);
