@@ -5,21 +5,9 @@ const cors = require("cors");
 const app = express();
 const port = 3000;
 const bodyParser = require("body-parser");
-const { Client } = require("pg");
-const client = new Client();
-const blogController = require("./blog.controller")(client);
-const authController = require("./auth.controller")(client);
-/*
-client.connect();
-let pass;
-console.log('retreiving pass from db');
-client.query('select * from users where id = 1', (err, ans)=>{
-  if(ans && ans.rows[0] && ans.rows[0].password){
-    pass = ans.rows[0].password;
-    console.log('cached pass on server');
-  }
-})
-*/
+const db = require("./db.controller.js");
+const blogController = require("./blog.controller")(db);
+const authController = require("./auth.controller")(db);
 
 app.use(cors());
 app.use(bodyParser.json());

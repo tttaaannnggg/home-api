@@ -98,20 +98,4 @@ DllNode.prototype.removeNode = function() {
   return { removed: this, prev: this.prev, next: this.next };
 };
 
-const c = new LRU(5);
-c.set("a", 1);
-c.delete("a");
-console.log(c);
-c.set("b", 2);
-c.set("c", 3);
-c.set("d", 4);
-c.set("e", 5);
-c.set("f", 6);
-c.set("g", 7);
-c.set("h", 8);
-console.log(c);
-console.log("deleting e");
-console.log(c.delete("e"));
-console.log(c);
-
 module.exports = LRU;
