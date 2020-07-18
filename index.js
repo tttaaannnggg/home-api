@@ -8,6 +8,7 @@ const bodyParser = require("body-parser");
 const { Client } = require("pg");
 const client = new Client();
 const blogController = require("./blog.controller")(client);
+const {buildController} = require("./build.controller");
 client.connect();
 let pass;
 console.log("retreiving pass from db");
@@ -40,8 +41,8 @@ const authController = (req, res, next) => {
 };
 
 app.post("/api/posts", authController, blogController.create);
-
 app.get("/api/posts/:id", blogController.readById);
 app.post("/api/posts/:id", authController, blogController.updateById);
+app.post("/api/build", buildController.rebuildFrontend, (req, res)=> res.json(res.locals.message))
 
 app.listen(port, () => console.log(`listening on ${port}`));
